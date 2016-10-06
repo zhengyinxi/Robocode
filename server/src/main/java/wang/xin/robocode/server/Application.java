@@ -1,4 +1,4 @@
-package wang.xin.robocode.server.bootstrap;
+package wang.xin.robocode.server;
 
 import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,12 +7,12 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 /**
  * Created by Xin on 2016/10/5.
  */
-@SpringBootApplication(scanBasePackages = "wang.xin.robocode.server")
-public class AppConfig {
+@SpringBootApplication
+public class Application {
 
     public static void main(String[] args) throws Exception {
         new SpringApplicationBuilder()
-                .sources(AppConfig.class)
+                .sources(Application.class)
                 .bannerMode(Banner.Mode.OFF)
                 .run(args);
     }
