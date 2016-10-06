@@ -1,8 +1,7 @@
-package wang.xin.robocode.server.web.ws;
+package wang.xin.robocode.server.ws.controllers;
 
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -15,7 +14,7 @@ public class GreetingController {
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
     public GreetingMessage greeting(HelloMessage message) throws Exception {
-        return new GreetingMessage("Hello, World!");
+        return new GreetingMessage("Hello, " + message.getName() + "!");
     }
 
     static class HelloMessage {
