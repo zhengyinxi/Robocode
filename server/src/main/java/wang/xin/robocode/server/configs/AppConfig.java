@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 /**
  * Created by Xin on 2016/10/6.
@@ -15,11 +16,11 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig {
 
     @Bean
-    public ObjectMapper objectMapper() {
-        return new ObjectMapper()
-                .setSerializationInclusion(JsonInclude.Include.NON_NULL)
-                .disable(MapperFeature.DEFAULT_VIEW_INCLUSION)
-                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-                .disable(SerializationFeature.WRITE_NULL_MAP_VALUES);
+    public Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder() {
+        return new Jackson2ObjectMapperBuilder()
+                .serializationInclusion(JsonInclude.Include.NON_NULL)
+                .featuresToDisable(MapperFeature.DEFAULT_VIEW_INCLUSION)
+                .featuresToDisable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+                .featuresToDisable(SerializationFeature.WRITE_NULL_MAP_VALUES);
     }
 }
