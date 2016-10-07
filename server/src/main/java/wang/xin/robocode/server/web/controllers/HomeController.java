@@ -20,8 +20,11 @@ import java.util.Map;
 public class HomeController {
 
     @GetMapping("/")
-    public String home() {
+    /*public String home() {
         return "Hello World!";
+    }*/
+    public ModelAndView home() {
+        return new ModelAndView("oauth2");
     }
 
     @GetMapping("/ping")
