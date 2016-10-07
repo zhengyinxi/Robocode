@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,11 @@ public class HomeController {
     @GetMapping("/ping")
     public String ping() {
         return "pong";
+    }
+
+    @RequestMapping("/user")
+    public Principal user(Principal principal) {
+        return principal;
     }
 
     @GetMapping("/debug")
