@@ -65,11 +65,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new ClientResources();
     }
 
+    @Bean
+    @ConfigurationProperties("microsoft")
+    public ClientResources microsoft() {
+        return new ClientResources();
+    }
+
     private Filter ssoFilter() {
         CompositeFilter filter = new CompositeFilter();
         List<Filter> filters = new ArrayList<>();
         filters.add(this.ssoFilter(this.facebook(), "/login/facebook"));
         filters.add(this.ssoFilter(this.github(), "/login/github"));
+        filters.add(this.ssoFilter(this.microsoft(), "/login/microsoft"));
         filter.setFilters(filters);
         return filter;
     }
