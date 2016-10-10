@@ -41,7 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/")).and()
                 .logout().logoutSuccessUrl("/").permitAll().and()
                 .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
-                .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
+                .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class)
+                .headers().httpStrictTransportSecurity().disable().and();
     }
 
     @Bean
