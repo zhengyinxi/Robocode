@@ -16,12 +16,6 @@ function connect() {
     var socket = new SockJS('/robocode/ws');
     stompClient = Stomp.over(socket);
     var headers = {};
-    var csrf = { // todo: request new csrf token /csrf
-        "token": $('#csrf').val(),
-        "parameterName": "_csrf",
-        "headerName": "X-XSRF-TOKEN"
-    };
-    headers[csrf.headerName] = csrf.token;
     stompClient.connect(headers, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);

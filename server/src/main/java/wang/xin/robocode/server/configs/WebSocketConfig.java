@@ -31,7 +31,12 @@ public class WebSocketConfig extends AbstractSecurityWebSocketMessageBrokerConfi
     protected void configureInbound(MessageSecurityMetadataSourceRegistry messages) {
         messages.simpMessageDestMatchers("/**").authenticated()
                 .simpSubscribeDestMatchers("/**").permitAll()
-                .anyMessage().denyAll();
+                .anyMessage().authenticated();
+    }
+
+    @Override
+    protected boolean sameOriginDisabled() {
+        return true;
     }
 
     public void registerStompEndpoints(StompEndpointRegistry registry) {
