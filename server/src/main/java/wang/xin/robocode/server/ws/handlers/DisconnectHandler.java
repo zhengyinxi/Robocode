@@ -1,21 +1,25 @@
-package wang.xin.robocode.server.ws;
+package wang.xin.robocode.server.ws.handlers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
+import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
-import wang.xin.robocode.server.data.model.ActiveWebSocketUser;
-import wang.xin.robocode.server.data.repository.ActiveWebSocketUserRepository;
+import wang.xin.robocode.server.data.models.ActiveWebSocketUser;
+import wang.xin.robocode.server.data.repositories.ActiveWebSocketUserRepository;
 
 import java.util.Arrays;
 
 /**
  * Created by zhengyinxi on 2016/10/8.
  */
-public class DisconnectHandler<S> implements ApplicationListener<SessionDisconnectEvent> {
+@Component
+public class DisconnectHandler implements ApplicationListener<SessionDisconnectEvent> {
 
-    private ActiveWebSocketUserRepository repository;
     private SimpMessageSendingOperations messagingTemplate;
+    private ActiveWebSocketUserRepository repository;
 
+    @Autowired
     public DisconnectHandler(SimpMessageSendingOperations messagingTemplate,
                              ActiveWebSocketUserRepository repository) {
         this.messagingTemplate = messagingTemplate;

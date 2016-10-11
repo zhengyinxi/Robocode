@@ -1,4 +1,4 @@
-package wang.xin.robocode.server.data.model;
+package wang.xin.robocode.server.data.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

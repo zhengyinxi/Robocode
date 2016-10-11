@@ -10,9 +10,9 @@ import org.springframework.security.config.annotation.web.socket.AbstractSecurit
 import org.springframework.session.ExpiringSession;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
-import wang.xin.robocode.server.data.repository.ActiveWebSocketUserRepository;
-import wang.xin.robocode.server.ws.ConnectHandler;
-import wang.xin.robocode.server.ws.DisconnectHandler;
+import wang.xin.robocode.server.data.repositories.ActiveWebSocketUserRepository;
+import wang.xin.robocode.server.ws.handlers.ConnectHandler;
+import wang.xin.robocode.server.ws.handlers.DisconnectHandler;
 
 /**
  * Created by Xin on 2016/10/6.
@@ -29,30 +29,12 @@ public class WebSocketConfig extends AbstractSecurityWebSocketMessageBrokerConfi
 
     @Override
     protected void configureInbound(MessageSecurityMetadataSourceRegistry messages) {
-        messages.simpMessageDestMatchers("/**").denyAll()
+        messages.simpMessageDestMatchers("/**").authenticated()
                 .simpSubscribeDestMatchers("/**").permitAll()
-                .anyMessage().authenticated();
+                .anyMessage().denyAll();
     }
 
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/ws").withSockJS();
-    }
-
-    @SuppressWarnings("SpringJavaAutowiringInspection")
-    @Bean
-    @Autowired
-    public <S extends ExpiringSession> ConnectHandler<S> webSocketConnectHandler(
-            SimpMessageSendingOperations messagingTemplate,
-            ActiveWebSocketUserRepository repository) {
-        return new ConnectHandler<S>(messagingTemplate, repository);
-    }
-
-    @SuppressWarnings("SpringJavaAutowiringInspection")
-    @Bean
-    @Autowired
-    public <S extends ExpiringSession> DisconnectHandler<S> webSocketDisconnectHandler(
-            SimpMessageSendingOperations messagingTemplate,
-            ActiveWebSocketUserRepository repository) {
-        return new DisconnectHandler<S>(messagingTemplate, repository);
     }
 }

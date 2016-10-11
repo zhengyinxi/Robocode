@@ -1,4 +1,4 @@
-package wang.xin.robocode.server.ws.model;
+package wang.xin.robocode.server.ws.models;
 
 import java.util.Calendar;
 

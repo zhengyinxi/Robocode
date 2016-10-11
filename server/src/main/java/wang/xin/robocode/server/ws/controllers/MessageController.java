@@ -8,8 +8,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import wang.xin.robocode.server.data.repository.ActiveWebSocketUserRepository;
-import wang.xin.robocode.server.ws.model.InstantMessage;
+import wang.xin.robocode.server.data.repositories.ActiveWebSocketUserRepository;
+import wang.xin.robocode.server.ws.models.InstantMessage;
 
 import java.util.List;
 

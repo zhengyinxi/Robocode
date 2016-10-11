@@ -1,8 +1,8 @@
-package wang.xin.robocode.server.data.repository;
+package wang.xin.robocode.server.data.repositories;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import wang.xin.robocode.server.data.model.ActiveWebSocketUser;
+import wang.xin.robocode.server.data.models.ActiveWebSocketUser;
 
 import java.util.List;
 

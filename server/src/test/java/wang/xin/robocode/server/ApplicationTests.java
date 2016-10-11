@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  * Created by Xin on 2016/10/7.
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest
+//@SpringBootTest
 public class ApplicationTests {
 
     @Test
