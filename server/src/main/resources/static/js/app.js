@@ -15,11 +15,25 @@ function setConnected(connected) {
 function connect() {
     var socket = new SockJS('/robocode/ws');
     stompClient = Stomp.over(socket);
-    stompClient.connect({}, function (frame) {
+    var headers = {};
+    var csrf = { // todo: request new csrf token /csrf
+        "token": "1d0f13f6-b768-40e6-a6a5-4b0df80963cc",
+        "parameterName": "_csrf",
+        "headerName": "X-XSRF-TOKEN"
+    };
+    headers[csrf.headerName] = csrf.token;
+    stompClient.connect(headers, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
         stompClient.subscribe('/topic/greetings', function (greeting) {
             showGreeting(JSON.parse(greeting.body).content);
+        });
+
+        stompClient.subscribe('/topic/friends/signin', function () {
+            console.log(arguments);
+        });
+        stompClient.subscribe('/topic/friends/signout', function () {
+            console.log(arguments);
         });
     });
 }
@@ -44,7 +58,13 @@ $(function () {
     $("form").on('submit', function (e) {
         e.preventDefault();
     });
-    $( "#connect" ).click(function() { connect(); });
-    $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#send" ).click(function() { sendName(); });
+    $("#connect").click(function () {
+        connect();
+    });
+    $("#disconnect").click(function () {
+        disconnect();
+    });
+    $("#send").click(function () {
+        sendName();
+    });
 });

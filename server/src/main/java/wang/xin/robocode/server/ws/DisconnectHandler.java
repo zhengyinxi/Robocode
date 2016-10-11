@@ -18,7 +18,6 @@ public class DisconnectHandler<S> implements ApplicationListener<SessionDisconne
 
     public DisconnectHandler(SimpMessageSendingOperations messagingTemplate,
                              ActiveWebSocketUserRepository repository) {
-        super();
         this.messagingTemplate = messagingTemplate;
         this.repository = repository;
     }
@@ -28,13 +27,13 @@ public class DisconnectHandler<S> implements ApplicationListener<SessionDisconne
         if (id == null) {
             return;
         }
+
         ActiveWebSocketUser user = this.repository.findOne(id);
         if (user == null) {
             return;
         }
 
         this.repository.delete(id);
-        this.messagingTemplate.convertAndSend("/topic/friends/signout",
-                Arrays.asList(user.getUsername()));
+        this.messagingTemplate.convertAndSend("/topic/friends/signout", Arrays.asList(user.getUsername()));
     }
 }

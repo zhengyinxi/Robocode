@@ -23,6 +23,7 @@ public class MessageController {
     private SimpMessageSendingOperations messagingTemplate;
     private ActiveWebSocketUserRepository activeUserRepository;
 
+    @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     public MessageController(ActiveWebSocketUserRepository activeUserRepository,
                              SimpMessageSendingOperations messagingTemplate) {

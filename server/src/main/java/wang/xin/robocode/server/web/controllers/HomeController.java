@@ -1,6 +1,7 @@
 package wang.xin.robocode.server.web.controllers;
 
 import com.google.common.collect.Maps;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,6 +33,11 @@ public class HomeController {
     @RequestMapping("/user")
     public Principal user(Principal principal) {
         return principal;
+    }
+
+    @RequestMapping("/csrf")
+    public CsrfToken csrf(CsrfToken token) {
+        return token;
     }
 
     @GetMapping("/debug")

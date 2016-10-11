@@ -22,7 +22,6 @@ public class ConnectHandler<S> implements ApplicationListener<SessionConnectEven
 
     public ConnectHandler(SimpMessageSendingOperations messagingTemplate,
                           ActiveWebSocketUserRepository repository) {
-        super();
         this.messagingTemplate = messagingTemplate;
         this.repository = repository;
     }
@@ -33,10 +32,9 @@ public class ConnectHandler<S> implements ApplicationListener<SessionConnectEven
         if (user == null) {
             return;
         }
+
         String id = SimpMessageHeaderAccessor.getSessionId(headers);
-        this.repository.save(
-                new ActiveWebSocketUser(id, user.getName(), Calendar.getInstance()));
-        this.messagingTemplate.convertAndSend("/topic/friends/signin",
-                Arrays.asList(user.getName()));
+        this.repository.save(new ActiveWebSocketUser(id, user.getName(), Calendar.getInstance()));
+        this.messagingTemplate.convertAndSend("/topic/friends/signin", Arrays.asList(user.getName()));
     }
 }

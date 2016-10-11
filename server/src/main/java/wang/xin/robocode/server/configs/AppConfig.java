@@ -14,6 +14,7 @@ import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -22,6 +23,7 @@ import javax.servlet.ServletException;
  * Created by Xin on 2016/10/6.
  */
 @Configuration
+//@EnableScheduling
 public class AppConfig implements ServletContextInitializer {
 
     @Override
