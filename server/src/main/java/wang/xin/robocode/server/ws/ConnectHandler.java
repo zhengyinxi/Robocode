@@ -16,11 +16,12 @@ import java.util.Calendar;
  * Created by zhengyinxi on 2016/10/8.
  */
 public class ConnectHandler<S> implements ApplicationListener<SessionConnectEvent> {
+
     private ActiveWebSocketUserRepository repository;
     private SimpMessageSendingOperations messagingTemplate;
 
     public ConnectHandler(SimpMessageSendingOperations messagingTemplate,
-                                   ActiveWebSocketUserRepository repository) {
+                          ActiveWebSocketUserRepository repository) {
         super();
         this.messagingTemplate = messagingTemplate;
         this.repository = repository;

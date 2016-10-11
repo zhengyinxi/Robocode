@@ -9,8 +9,7 @@ import java.util.List;
 /**
  * Created by zhengyinxi on 2016/10/8.
  */
-public interface ActiveWebSocketUserRepository
-        extends CrudRepository<ActiveWebSocketUser, String> {
+public interface ActiveWebSocketUserRepository extends CrudRepository<ActiveWebSocketUser, String> {
 
     @Query("select DISTINCT(u.username) from ActiveWebSocketUser u where u.username != ?#{principal?.username}")
     List<String> findAllActiveUsers();

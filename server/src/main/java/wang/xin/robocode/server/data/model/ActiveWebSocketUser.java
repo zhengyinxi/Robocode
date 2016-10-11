@@ -9,6 +9,7 @@ import java.util.Calendar;
  */
 @Entity
 public class ActiveWebSocketUser {
+
     @Id
     private String id;
 
@@ -26,6 +27,14 @@ public class ActiveWebSocketUser {
         this.connectionTime = connectionTime;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getUsername() {
         return this.username;
     }
@@ -41,5 +50,4 @@ public class ActiveWebSocketUser {
     public void setConnectionTime(Calendar connectionTime) {
         this.connectionTime = connectionTime;
     }
-
 }

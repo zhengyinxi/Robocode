@@ -12,6 +12,7 @@ import java.util.Arrays;
  * Created by zhengyinxi on 2016/10/8.
  */
 public class DisconnectHandler<S> implements ApplicationListener<SessionDisconnectEvent> {
+
     private ActiveWebSocketUserRepository repository;
     private SimpMessageSendingOperations messagingTemplate;
 
@@ -35,6 +36,5 @@ public class DisconnectHandler<S> implements ApplicationListener<SessionDisconne
         this.repository.delete(id);
         this.messagingTemplate.convertAndSend("/topic/friends/signout",
                 Arrays.asList(user.getUsername()));
-
     }
 }

@@ -6,6 +6,7 @@ import java.util.Calendar;
  * Created by zhengyinxi on 2016/10/8.
  */
 public class InstantMessage {
+
     private String to;
 
     private String from;

@@ -19,6 +19,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/messages")
 public class MessageController {
+
     private SimpMessageSendingOperations messagingTemplate;
     private ActiveWebSocketUserRepository activeUserRepository;
 
