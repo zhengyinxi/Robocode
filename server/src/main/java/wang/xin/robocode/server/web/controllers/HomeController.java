@@ -1,6 +1,5 @@
 package wang.xin.robocode.server.web.controllers;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,8 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
-import java.util.Calendar;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -44,6 +41,4 @@ public class HomeController {
         map.put("null", null);
         return map;
     }
-
-
 }

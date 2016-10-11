@@ -19,6 +19,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHttpSession;
 import org.springframework.web.filter.CompositeFilter;
 
 import javax.servlet.Filter;
@@ -29,20 +30,23 @@ import java.util.List;
  * Created by Xin on 2016/10/7.
  */
 @Configuration
+@EnableJdbcHttpSession
 @EnableOAuth2Client
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     private OAuth2ClientContext oauth2ClientContext;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.antMatcher("/**").authorizeRequests().antMatchers("/", "/login**", "/webjars/**").permitAll().anyRequest().authenticated().and()
+        http.antMatcher("/**").authorizeRequests().antMatchers("/", "/login**", "/webjars/**", "/h2-console/**").permitAll().anyRequest().authenticated().and()
                 .exceptionHandling().authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/")).and()
                 .logout().logoutSuccessUrl("/").permitAll().and()
-                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
+                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).ignoringAntMatchers("/h2-console/**").and()
                 .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class)
-                .headers().httpStrictTransportSecurity().disable().and();
+                .headers().httpStrictTransportSecurity().disable().frameOptions().sameOrigin().and()
+                ;
     }
 
     @Bean
