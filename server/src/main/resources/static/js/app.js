@@ -17,7 +17,7 @@ function connect() {
     stompClient = Stomp.over(socket);
     var headers = {};
     var csrf = { // todo: request new csrf token /csrf
-        "token": "1d0f13f6-b768-40e6-a6a5-4b0df80963cc",
+        "token": $('#csrf').val(),
         "parameterName": "_csrf",
         "headerName": "X-XSRF-TOKEN"
     };
