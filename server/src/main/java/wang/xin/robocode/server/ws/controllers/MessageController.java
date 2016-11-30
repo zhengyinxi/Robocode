@@ -1,5 +1,6 @@
 package wang.xin.robocode.server.ws.controllers;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
@@ -20,16 +21,11 @@ import java.util.List;
 @RequestMapping("/messages")
 public class MessageController {
 
+    @Autowired
     private SimpMessageSendingOperations messagingTemplate;
-    private ActiveWebSocketUserRepository activeUserRepository;
-
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
-    public MessageController(ActiveWebSocketUserRepository activeUserRepository,
-                             SimpMessageSendingOperations messagingTemplate) {
-        this.activeUserRepository = activeUserRepository;
-        this.messagingTemplate = messagingTemplate;
-    }
+    private ActiveWebSocketUserRepository activeUserRepository;
 
     @RequestMapping("/")
     public String im() {
@@ -47,6 +43,7 @@ public class MessageController {
 
     @SubscribeMapping("/users")
     public List<String> subscribeMessages() throws Exception {
-        return this.activeUserRepository.findAllActiveUsers();
+        //return this.activeUserRepository.findAllActiveUsers();
+        throw new NotImplementedException("TODO");
     }
 }

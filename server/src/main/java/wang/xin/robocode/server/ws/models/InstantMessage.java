@@ -8,11 +8,8 @@ import java.util.Calendar;
 public class InstantMessage {
 
     private String to;
-
     private String from;
-
     private String message;
-
     private Calendar created = Calendar.getInstance();
 
     public String getTo() {

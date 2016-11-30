@@ -1,8 +1,7 @@
 package wang.xin.robocode.server.data.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.util.Calendar;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 /**
  * Created by zhengyinxi on 2016/10/8.
@@ -11,43 +10,34 @@ import java.util.Calendar;
 public class ActiveWebSocketUser {
 
     @Id
-    private String id;
+    private String sessionId;
+    private LocalDateTime connectTime;
+    @MapsId
+    @JoinColumn
+    @ManyToOne
+    private User user;
 
-    private String username;
-
-    private Calendar connectionTime;
-
-    public ActiveWebSocketUser() {
+    public String getSessionId() {
+        return sessionId;
     }
 
-    public ActiveWebSocketUser(String id, String username, Calendar connectionTime) {
-        super();
-        this.id = id;
-        this.username = username;
-        this.connectionTime = connectionTime;
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 
-    public String getId() {
-        return id;
+    public LocalDateTime getConnectTime() {
+        return this.connectTime;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setConnectTime(LocalDateTime connectTime) {
+        this.connectTime = connectTime;
     }
 
-    public String getUsername() {
-        return this.username;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public Calendar getConnectionTime() {
-        return this.connectionTime;
-    }
-
-    public void setConnectionTime(Calendar connectionTime) {
-        this.connectionTime = connectionTime;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
