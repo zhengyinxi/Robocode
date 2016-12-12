@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <include file="spring-session.xml" relativeToChangelogFile="true"/>
+
+    <changeSet id="database-1" author="xin.wang">
+        <createTable tableName="ACTIVE_WEB_SOCKET_USER">
+            <column name="SESSION_ID" type="VARCHAR(20)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="CONNECT_TIME" type="DATETIME"/>
+            <column name="USER_ID" type="INT"/>
+        </createTable>
+        <createTable tableName="USER">
+            <column name="ID" type="INT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="NAME" type="VARCHAR(20)"/>
+        </createTable>
+        <createTable tableName="OAUTH_USER">
+            <column name="SOURCE" type="VARCHAR(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="ID" type="VARCHAR(50)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="USER_ID" type="INT"/>
+            <column name="NAME" type="VARCHAR(20)"/>
+        </createTable>
+
+        <insert tableName="USER">
+            <column name="ID">1</column>
+            <column name="NAME">xin</column>
+        </insert>
+        <insert tableName="USER">
+            <column name="ID">2</column>
+            <column name="NAME">yinxi</column>
+        </insert>
+        <insert tableName="OAUTH_USER">
+            <column name="USER_ID">1</column>
+            <column name="SOURCE">GitHub</column>
+            <column name="ID">1797577</column>
+            <column name="NAME">HeroXXiv</column>
+        </insert>
+        <insert tableName="OAUTH_USER">
+            <column name="USER_ID">1</column>
+            <column name="SOURCE">Facebook</column>
+            <column name="ID">1077215849043332</column>
+            <column name="NAME">Xin Wang</column>
+        </insert>
+        <insert tableName="OAUTH_USER">
+            <column name="USER_ID">1</column>
+            <column name="SOURCE">Microsoft</column>
+            <column name="ID">4014d0c8e6b8ea25</column>
+            <column name="NAME">Xin Wang</column>
+        </insert>
+    </changeSet>
+    <changeSet id="boot-clean-up" author="xin.wang" runAlways="true" >
+        <preConditions>
+            <tableExists tableName="ACTIVE_WEB_SOCKET_USER"/>
+        </preConditions>
+        <sql dbms="h2, oracle">
+            TRUNCATE TABLE ACTIVE_WEB_SOCKET_USER;
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

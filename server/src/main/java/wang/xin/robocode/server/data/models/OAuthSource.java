@@ -7,5 +7,15 @@ public enum OAuthSource {
 
     GitHub,
     Facebook,
-    Microsoft
+    Microsoft;
+
+    public static OAuthSource fromString(String name) {
+        for (OAuthSource value : OAuthSource.values()) {
+            if (value.toString().equals(name)) {
+                return value;
+            }
+        }
+
+        return null;
+    }
 }

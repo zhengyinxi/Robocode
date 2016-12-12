@@ -13,7 +13,7 @@ public class OAuthUserId implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private OAuthSource source;
-    private String principal;
+    private String id;
 
     public OAuthSource getSource() {
         return source;
@@ -23,11 +23,11 @@ public class OAuthUserId implements Serializable {
         this.source = source;
     }
 
-    public String getPrincipal() {
-        return principal;
+    public String getId() {
+        return id;
     }
 
-    public void setPrincipal(String principal) {
-        this.principal = principal;
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -12,14 +12,15 @@ import wang.xin.robocode.server.data.repositories.ActiveWebSocketUserRepository;
 /**
  * Created by zhengyinxi on 2016/10/8.
  */
+@SuppressWarnings("SpringJavaAutowiringInspection")
 @Component
 public class DisconnectHandler implements ApplicationListener<SessionDisconnectEvent> {
 
     @Autowired
     private SimpMessageSendingOperations messagingTemplate;
-    @SuppressWarnings("SpringJavaAutowiringInspection")
+
     @Autowired
-    private ActiveWebSocketUserRepository repository;
+    private ActiveWebSocketUserRepository activeWebSocketUserRepository;
 
     public void onApplicationEvent(SessionDisconnectEvent event) {
         String sessionId = event.getSessionId();
@@ -27,12 +28,12 @@ public class DisconnectHandler implements ApplicationListener<SessionDisconnectE
             return;
         }
 
-        ActiveWebSocketUser wsUser = this.repository.findOne(sessionId);
-        if (wsUser == null) {
+        ActiveWebSocketUser activeUser = this.activeWebSocketUserRepository.findOne(sessionId);
+        if (activeUser == null) {
             return;
         }
 
-        this.repository.delete(sessionId);
-        this.messagingTemplate.convertAndSend("/topic/friends/signout", Lists.newArrayList(wsUser));
+        this.activeWebSocketUserRepository.delete(sessionId);
+        this.messagingTemplate.convertAndSend("/topic/friends/signout", Lists.newArrayList(activeUser));
     }
 }

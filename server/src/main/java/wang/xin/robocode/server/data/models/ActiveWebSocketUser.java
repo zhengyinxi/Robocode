@@ -12,8 +12,7 @@ public class ActiveWebSocketUser {
     @Id
     private String sessionId;
     private LocalDateTime connectTime;
-    @MapsId
-    @JoinColumn
+    @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
     @ManyToOne
     private User user;
 
@@ -26,7 +25,7 @@ public class ActiveWebSocketUser {
     }
 
     public LocalDateTime getConnectTime() {
-        return this.connectTime;
+        return connectTime;
     }
 
     public void setConnectTime(LocalDateTime connectTime) {

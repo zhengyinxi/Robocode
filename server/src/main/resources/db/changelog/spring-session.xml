@@ -4,7 +4,7 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
-    <changeSet id="1" author="xin.wang">
+    <changeSet id="spring-session-1.2.2" author="xin.wang">
         <sql dbms="h2, oracle"
              endDelimiter="\nGO"
              splitStatements="true"
@@ -25,15 +25,12 @@
             ATTRIBUTE_NAME VARCHAR(200),
             ATTRIBUTE_BYTES LONGVARBINARY,
             CONSTRAINT SPRING_SESSION_ATTRIBUTES_PK PRIMARY KEY (SESSION_ID, ATTRIBUTE_NAME),
-            CONSTRAINT SPRING_SESSION_ATTRIBUTES_FK FOREIGN KEY (SESSION_ID) REFERENCES SPRING_SESSION(SESSION_ID) ON DELETE CASCADE
+            CONSTRAINT SPRING_SESSION_ATTRIBUTES_FK FOREIGN KEY (SESSION_ID) REFERENCES SPRING_SESSION(SESSION_ID) ON
+            DELETE CASCADE
             );
 
             CREATE INDEX SPRING_SESSION_ATTRIBUTES_IX1 ON SPRING_SESSION_ATTRIBUTES (SESSION_ID);
         </sql>
-    </changeSet>
-
-    <changeSet id="2" author="xin.wang">
-        <!-- todo: create table, insert data -->
     </changeSet>
 
 </databaseChangeLog>

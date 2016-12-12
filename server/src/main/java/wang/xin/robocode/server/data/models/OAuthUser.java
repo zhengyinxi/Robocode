@@ -1,7 +1,6 @@
 package wang.xin.robocode.server.data.models;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * Created by Xin on 11/30/2016.
@@ -14,9 +13,8 @@ public class OAuthUser {
     @Enumerated(EnumType.STRING)
     private OAuthSource source;
     @Id
-    private String principal;
-    @MapsId
-    @JoinColumn
+    private String id;
+    @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
     @ManyToOne
     private User user;
     private String name;
@@ -29,12 +27,12 @@ public class OAuthUser {
         this.source = source;
     }
 
-    public String getPrincipal() {
-        return principal;
+    public String getId() {
+        return id;
     }
 
-    public void setPrincipal(String principal) {
-        this.principal = principal;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public User getUser() {

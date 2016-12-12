@@ -39,12 +39,4 @@ public class HomeController {
     public CsrfToken csrf(CsrfToken token) {
         return token;
     }
-
-    @GetMapping("/debug")
-    public Map debug() {
-        Map map = Maps.newHashMap();
-        map.put("a", 1);
-        map.put("null", null);
-        return map;
-    }
 }

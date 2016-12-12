@@ -17,13 +17,14 @@ import java.util.List;
 /**
  * Created by zhengyinxi on 2016/10/8.
  */
+@SuppressWarnings("SpringJavaAutowiringInspection")
 @Controller
 @RequestMapping("/messages")
 public class MessageController {
 
     @Autowired
     private SimpMessageSendingOperations messagingTemplate;
-    @SuppressWarnings("SpringJavaAutowiringInspection")
+
     @Autowired
     private ActiveWebSocketUserRepository activeUserRepository;
 
