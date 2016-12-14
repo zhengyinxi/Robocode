@@ -34,6 +34,6 @@ public class DisconnectHandler implements ApplicationListener<SessionDisconnectE
         }
 
         this.activeWebSocketUserRepository.delete(sessionId);
-        this.messagingTemplate.convertAndSend("/topic/friends/signout", Lists.newArrayList(activeUser));
+        this.messagingTemplate.convertAndSend("/su/disconnected", Lists.newArrayList(activeUser));
     }
 }

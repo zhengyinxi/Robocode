@@ -1,6 +1,7 @@
 package wang.xin.robocode.server.data.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import wang.xin.robocode.server.data.models.OAuthSource;
 import wang.xin.robocode.server.data.models.OAuthUser;
 import wang.xin.robocode.server.data.models.OAuthUserId;

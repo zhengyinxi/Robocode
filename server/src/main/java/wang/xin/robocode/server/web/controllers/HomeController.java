@@ -1,5 +1,6 @@
 package wang.xin.robocode.server.web.controllers;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,11 +19,20 @@ import java.util.Map;
 public class HomeController {
 
     @GetMapping("/")
-    /*public String home() {
-        return "Hello World!";
-    }*/
     public ModelAndView home() {
-        return new ModelAndView("oauth2");
+        return new ModelAndView("home");
+    }
+
+    @GetMapping("/login")
+    public ModelAndView login() {
+        return new ModelAndView("login");
+    }
+
+    @GetMapping("/debug")
+    public ModelAndView debug() {
+        ModelAndView view = new ModelAndView("messages/list");
+        view.addObject("messages", Lists.newArrayList());
+        return view;
     }
 
     @GetMapping("/ping")
@@ -31,8 +41,8 @@ public class HomeController {
     }
 
     @RequestMapping("/user")
-    public Principal user(Principal principal) {
-        return principal;
+    public Principal user(Principal user) {
+        return user;
     }
 
     @RequestMapping("/csrf")
