@@ -1,18 +1,11 @@
 package wang.xin.robocode.server.configs;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.security.config.annotation.web.messaging.MessageSecurityMetadataSourceRegistry;
 import org.springframework.security.config.annotation.web.socket.AbstractSecurityWebSocketMessageBrokerConfigurer;
-import org.springframework.session.ExpiringSession;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
-import wang.xin.robocode.server.data.repositories.ActiveWebSocketUserRepository;
-import wang.xin.robocode.server.ws.handlers.ConnectHandler;
-import wang.xin.robocode.server.ws.handlers.DisconnectHandler;
 
 /**
  * Created by Xin on 2016/10/6.

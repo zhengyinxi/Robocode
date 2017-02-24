@@ -29,6 +29,7 @@ import org.springframework.security.oauth2.provider.OAuth2Request;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.DigestAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHttpSession;
 import org.springframework.util.Assert;
 import org.springframework.web.filter.CompositeFilter;
@@ -36,10 +37,11 @@ import wang.xin.robocode.server.data.models.OAuthSource;
 import wang.xin.robocode.server.data.models.OAuthUser;
 import wang.xin.robocode.server.data.repositories.OAuthUserRepository;
 
-import javax.servlet.Filter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.Filter;
 
 /**
  * Created by Xin on 2016/10/7.
@@ -58,9 +60,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.antMatcher("/**").authorizeRequests().antMatchers("/", "/login**", "/webjars/**").permitAll().anyRequest().authenticated().and()
-                .exceptionHandling().authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login")).and()
-                .logout().logoutSuccessUrl("/").permitAll().and()
+        http.antMatcher("/**")
+                .authorizeRequests().antMatchers("/", "/login**", "/webjars**").permitAll().anyRequest().authenticated().and()
+                .exceptionHandling()/*.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"))*/.and()
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").permitAll().and()
                 .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
                 .addFilterBefore(this.ssoFilter(), DigestAuthenticationFilter.class)
                 .headers().httpStrictTransportSecurity().disable().and()
@@ -69,7 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/h2-console/**");
+        web.ignoring().antMatchers("/h2-console/**").and();
     }
 
     @Bean

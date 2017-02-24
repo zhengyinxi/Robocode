@@ -19,6 +19,7 @@ import wang.xin.robocode.server.data.models.OAuthSource;
 import wang.xin.robocode.server.data.models.User;
 import wang.xin.robocode.server.data.repositories.ActiveWebSocketUserRepository;
 import wang.xin.robocode.server.data.repositories.OAuthUserRepository;
+import wang.xin.robocode.server.data.repositories.UserRepository;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
@@ -36,6 +37,9 @@ public class ConnectHandler implements ApplicationListener<SessionConnectEvent> 
 
     @Autowired
     private ActiveWebSocketUserRepository activeWebSocketUserRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public void onApplicationEvent(SessionConnectEvent event) {
         MessageHeaders headers = event.getMessage().getHeaders();
@@ -59,9 +63,7 @@ public class ConnectHandler implements ApplicationListener<SessionConnectEvent> 
         ActiveWebSocketUser activeUser = new ActiveWebSocketUser();
         activeUser.setSessionId(sessionId);
         activeUser.setConnectTime(LocalDateTime.now());
-        User user = new User();
-        user.setId(sourceAndId.getRight());
-        activeUser.setUser(user);
+        activeUser.setUser(this.userRepository.findOne(sourceAndId.getRight()));
         this.activeWebSocketUserRepository.save(activeUser);
         this.messagingTemplate.convertAndSend("/su/connected", Lists.newArrayList(activeUser));
     }

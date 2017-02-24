@@ -1,7 +1,11 @@
 package wang.xin.robocode.server.data.models;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * Created by zhengyinxi on 2016/10/8.

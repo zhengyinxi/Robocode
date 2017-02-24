@@ -1,1 +1,57 @@
-home
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Robocode</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <base th:href="@{/}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+</head>
+<body ng-controller="HomeController as home">
+
+<header>
+    <nav>
+        <ul>
+            <li><i class="glyphicon glyphicon-cloud"></i></li>
+            <li><a th:href="@{/}">Home</a></li>
+        </ul>
+    </nav>
+
+    <section>
+        <div class="btn-group" ng-show="!home.authenticated">
+            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Login with... <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li ng-repeat="p in home.authProviders | orderBy: 'id'">
+                    <a href="{{p.href}}">{{p.name}}</a>
+                </li>
+            </ul>
+        </div>
+
+        <div ng-show="home.authenticated" ng-cloak="">
+            Logged in as: <span ng-bind="home.user"></span>
+            <div>
+                <button ng-click="home.logout()" class="btn btn-primary btn-xs">Logout</button>
+            </div>
+        </div>
+    </section>
+</header>
+
+<section>
+    <div class="embed-responsive embed-responsive-4by3" style="background-color:gray;outline:2px solid red;outline-offset:-2px;">
+        <div>&nbsp;</div>
+    </div>
+</section>
+
+<footer>&copy;</footer>
+
+<script th:src="@{/webjars.js}"></script>
+<script th:data-main="@{/js/main}" th:src="@{/webjars/requirejs/require.min.js}"></script>
+
+</body>
+</html>
