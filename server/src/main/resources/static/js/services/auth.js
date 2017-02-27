@@ -6,7 +6,7 @@ define([
     var moduleName = 'AuthModule';
     angular
         .module(moduleName, [])
-        .factory('auth', function ($http, $window) {
+        .factory('auth', function ($q, $http, $window) {
             return {
                 providers: [
                     {
@@ -26,15 +26,23 @@ define([
                     }
                 ],
 
-                check: function (success, error) {
-                    $http.get('user').then(success, error);
+                check: function () {
+                    var dfd = $q.defer();
+                    $http.get('user')
+                        .then(function (response) {
+                            dfd.resolve(response.data);
+                        }, function () {
+                            dfd.reject();
+                        });
+                    return dfd.promise;
                 },
 
                 login: function (name) {
+                    var providers = this.providers;
                     var provider;
-                    angular.forEach(this.providers, function(p) {
-                        if (!provider && p.name === name) {
-                            provider = p;
+                    angular.forEach(providers, function (it) {
+                        if (!provider && it.name === name) {
+                            provider = it;
                         }
                     });
 
@@ -45,8 +53,15 @@ define([
                     $window.location.assign(provider.href);
                 },
 
-                logout: function(success, error) {
-                    $http.post('logout', {}).then(success, error);
+                logout: function () {
+                    var dfd = $q.defer();
+                    $http.post('logout', {})
+                        .then(function () {
+                            dfd.resolve();
+                        }, function () {
+                            dfd.reject();
+                        });
+                    return dfd.promise;
                 }
             };
         });

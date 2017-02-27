@@ -6,12 +6,14 @@ require([
     require([
         'controllers/home',
         'services/auth',
+        'services/trans',
         'angular-animate',
         'angular-route'
-    ], function (homeCtrl, authSrv) {
+    ], function (homeCtrl, authSrv, transSrv) {
         angular
-            .module('app', [authSrv, 'ngAnimate', 'ngRoute'])
-            .config(function ($routeProvider, $locationProvider) {
+            .module('app', [authSrv, transSrv, 'ngAnimate', 'ngRoute'])
+            .config(function ($qProvider, $routeProvider, $locationProvider) {
+                $qProvider.errorOnUnhandledRejections(false);
                 $locationProvider.html5Mode({
                     enabled: false
                 }).hashPrefix('!');
