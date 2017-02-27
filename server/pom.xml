@@ -38,6 +38,7 @@
         <thymeleaf-layout-dialect.version>2.1.2</thymeleaf-layout-dialect.version>
         <requirejs.version>2.3.2</requirejs.version>
         <angularjs.version>1.6.1</angularjs.version>
+        <angular-ui-router.version>0.2.18</angular-ui-router.version>
         <jquery.version>3.1.1-1</jquery.version>
         <bootstrap.version>3.3.7-1</bootstrap.version>
         <Semantic-UI.version>2.2.7</Semantic-UI.version>
@@ -207,6 +208,11 @@
             <groupId>org.webjars</groupId>
             <artifactId>angularjs</artifactId>
             <version>${angularjs.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>angular-ui-router</artifactId>
+            <version>${angular-ui-router.version}</version>
         </dependency>
         <dependency>
             <groupId>org.webjars</groupId>

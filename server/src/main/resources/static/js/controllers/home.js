@@ -3,14 +3,14 @@
 define([
     'angular'
 ], function (angular) {
-    return ['$http', '$route', 'auth',
-        function ($http, $route, auth) {
+    return ['$http', '$window', 'auth', 'transfer',
+        function ($http, $window, auth, trans) {
             var self = this;
             self.authProviders = auth.providers;
             self.user = "N/A";
             self.authenticated = false;
 
-            $http.get('user').then(function (response) {
+            auth.check(function (response) {
                 var data = response.data;
                 if (data.name) {
                     self.user = data.name;
@@ -20,12 +20,14 @@ define([
             });
 
             self.logout = function () {
-                $http.post('logout', {}).then(function () {
+                auth.logout(function () {
                     self.authenticated = false;
-                    $route.reload();
+                    $window.location.reload();
                 }, function () {
                 });
-            };
+            }
+
+
         }
     ];
 });

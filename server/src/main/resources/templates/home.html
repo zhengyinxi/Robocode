@@ -27,7 +27,7 @@
                 Login with... <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li ng-repeat="p in home.authProviders | orderBy: 'id'">
+                <li ng-repeat="p in home.authProviders | orderBy: '_order'">
                     <a href="{{p.href}}">{{p.name}}</a>
                 </li>
             </ul>
@@ -51,7 +51,7 @@
 <footer>&copy;</footer>
 
 <script th:src="@{/webjars.js}"></script>
-<script th:data-main="@{/js/main}" th:src="@{/webjars/requirejs/require.min.js}"></script>
+<script th:attr="data-main=@{/js/main}" th:src="@{/webjars/requirejs/require.min.js}"></script>
 
 </body>
 </html>

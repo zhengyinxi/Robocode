@@ -14,7 +14,7 @@ require([
             .config(function ($routeProvider, $locationProvider) {
                 $locationProvider.html5Mode({
                     enabled: false
-                }).hashPrefix('*');
+                }).hashPrefix('!');
             })
             .controller('HomeController', homeCtrl);
         angular.element(function () {
