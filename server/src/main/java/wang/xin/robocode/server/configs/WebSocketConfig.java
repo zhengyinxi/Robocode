@@ -16,15 +16,17 @@ public class WebSocketConfig extends AbstractSecurityWebSocketMessageBrokerConfi
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/");
-        config.setApplicationDestinationPrefixes("/");
+        config.setApplicationDestinationPrefixes("/")
+                .enableSimpleBroker("/")
+        ;
     }
 
     @Override
     protected void configureInbound(MessageSecurityMetadataSourceRegistry messages) {
         messages.simpMessageDestMatchers("/**").authenticated()
                 .simpSubscribeDestMatchers("/**").permitAll()
-                .anyMessage().authenticated();
+                .anyMessage().authenticated()
+        ;
     }
 
     @Override

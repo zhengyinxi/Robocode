@@ -3,8 +3,10 @@
 define([
     'angular'
 ], function (angular) {
-    return ['$http', '$window', '$timeout', 'auth', 'trans',
-        function ($http, $window, $timeout, auth, trans) {
+    // static methods
+
+    return ['$scope', '$http', '$window', '$timeout', 'auth', 'trans',
+        function ($scope, $http, $window, $timeout, auth, trans) {
             var self = this;
             self.authProviders = auth.providers;
             self.user = "N/A";
@@ -28,6 +30,13 @@ define([
                     });
             }
 
+            $scope.$watch(function () {
+                return self.authenticated;
+            }, function(newVal, oldVal) {
+                console.log(arguments);
+            });
+
+            // watch for authenticated;
             trans.connect()
                 .then(function () {
                     trans.sendName('wtf');
