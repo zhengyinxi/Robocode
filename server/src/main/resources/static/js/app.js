@@ -12,8 +12,10 @@ require([
     ], function (homeCtrl, authSrv, transSrv) {
         angular
             .module('app', [authSrv, transSrv, 'ngAnimate', 'ngRoute'])
-            .config(function ($qProvider, $routeProvider, $locationProvider) {
+            .config(function($qProvider) {
                 $qProvider.errorOnUnhandledRejections(false);
+            })
+            .config(function ($routeProvider, $locationProvider) {
                 $locationProvider.html5Mode({
                     enabled: false
                 }).hashPrefix('!');

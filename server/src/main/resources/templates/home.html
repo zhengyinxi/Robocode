@@ -25,7 +25,8 @@
 
     <section>
         <div class="btn-group" ng-show="!home.authenticated">
-            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
                 Login with... <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
@@ -44,12 +45,20 @@
     </section>
 </header>
 
-<section>
-    <div class="embed-responsive embed-responsive-4by3"
-         style="background-color:gray;outline:2px solid red;outline-offset:-2px;">
-        <div>&nbsp;</div>
-    </div>
-</section>
+<main>
+    <section>
+        <div class="embed-responsive embed-responsive-4by3"
+             style="background-color:gray;outline:2px solid red;outline-offset:-2px;">
+            <div>&nbsp;</div>
+        </div>
+    </section>
+    <aside style="width: 200px;">
+        <span>Online: </span>
+        <ul>
+            <li ng-repeat="u in home.onlineUsers"></li>
+        </ul>
+    </aside>
+</main>
 
 <footer>&copy;</footer>
 

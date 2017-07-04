@@ -9,7 +9,6 @@ define([
     angular
         .module(moduleName, [])
         .factory('trans', function ($q, $window) {
-            Stomp = $window.Stomp; // not exported
             return {
                 _client: undefined,
 
@@ -18,19 +17,11 @@ define([
                 connect: function () {
                     var dfd = $q.defer();
                     var self = this;
-                    self._client = Stomp.over(new SockJS('./ws'));
+                    var client = self._client = Stomp.over(new SockJS('./ws'));
                     var headers = {};
-                    self._client.connect(headers, function (frame) {
+                    client.connect(headers, function (frame) {
                         self.connected = true;
-                        self._client.subscribe('/topic/greetings', function (greeting) {
-                            console.log(greeting);
-                        });
-                        self._client.subscribe('/topic/friends/signin', function () {
-                            console.log(arguments);
-                        });
-                        self._client.subscribe('/topic/friends/signout', function () {
-                            console.log(arguments);
-                        });
+                        self._subscribes(client);
 
                         dfd.resolve();
                     }, function () {
@@ -42,9 +33,22 @@ define([
 
                 disconnect: function () {
                     var dfd = $q.defer();
-                    this._client && this.connected && this._client.disconnect(function () {
-                        this.connected = false;
+                    var self = this;
+                    self._client && self.connected && self._client.disconnect(function () {
+                        self.connected = false;
                         dfd.resolve();
+                    });
+                },
+
+                _subscribes: function (client) {
+                    client.subscribe('/topic/greetings', function (greeting) {
+                        console.log(greeting);
+                    });
+                    client.subscribe('/topic/friends/signin', function () {
+                        console.log(arguments);
+                    });
+                    client.subscribe('/topic/friends/signout', function () {
+                        console.log(arguments);
                     });
                 },
 
